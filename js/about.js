@@ -55,6 +55,11 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementsByClassName('miscellaneous')[0].innerText = misc_count;
 	document.getElementsByClassName('achievements')[0].innerText = achievemet_count;
 
+	document.getElementsByClassName('liveEventsPct')[0].innerText = ((live_count/tweet_array.length) * 100).toFixed(2) + "%" ;
+	document.getElementsByClassName('completedEventsPct')[0].innerText = ((completed_count/tweet_array.length) * 100).toFixed(2) + "%";
+	document.getElementsByClassName('miscellaneousPct')[0].innerText =((misc_count/tweet_array.length) * 100).toFixed(2) + "%";
+	document.getElementsByClassName('achievementsPct')[0].innerText = ((achievemet_count/tweet_array.length) * 100).toFixed(2) + "%";
+
 }
 
 //Wait for the DOM to load
