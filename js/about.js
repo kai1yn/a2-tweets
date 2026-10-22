@@ -27,7 +27,7 @@ function parseTweets(runkeeper_tweets) {
 			latest_date = tweet.time;
 	}
 
-	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"source")?.get?.toString());
+	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"written")?.get?.toString());
 	//formats like eample
 	const options = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'};
 	
@@ -59,6 +59,21 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementsByClassName('completedEventsPct')[0].innerText = ((completed_count/tweet_array.length) * 100).toFixed(2) + "%";
 	document.getElementsByClassName('miscellaneousPct')[0].innerText =((misc_count/tweet_array.length) * 100).toFixed(2) + "%";
 	document.getElementsByClassName('achievementsPct')[0].innerText = ((achievemet_count/tweet_array.length) * 100).toFixed(2) + "%";
+
+	//Part 1: User-Written Tweets
+	let written_count = 0;
+
+
+	for (let tweet of tweet_array){ 
+	if (tweet.written == true){
+		written_count ++;
+		
+	}
+	}
+	document.getElementsByClassName('completedEvents')[1].innerText = completed_count;
+	document.getElementsByClassName('written')[0].innerText = written_count;
+	document.getElementsByClassName('writtenPct')[0].innerText = ((written_count/completed_count) * 100).toFixed(2) + "%";
+
 
 }
 
