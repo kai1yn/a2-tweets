@@ -13,6 +13,7 @@ function parseTweets(runkeeper_tweets) {
 	//It works correctly, your task is to update the text of the other tags in the HTML file!
 	document.getElementById('numberTweets').innerText = tweet_array.length;	
 
+	//Part 1: Tweet Dates
 	let earliest_date = tweet_array[0].time;
 	let latest_date = tweet_array[0].time;
 
@@ -26,10 +27,33 @@ function parseTweets(runkeeper_tweets) {
 			latest_date = tweet.time;
 	}
 
+	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"source")?.get?.toString());
+	//formats like eample
 	const options = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'};
 	
 	document.getElementById('firstDate').innerText = earliest_date.toLocaleDateString('en-US', options);
 	document.getElementById('lastDate').innerText = latest_date.toLocaleDateString('en-US', options);
+	
+	//Part 1: Tweet Categories
+	let live_count = 0; let achievemet_count = 0; let completed_count = 0; misc_count = 0; 
+	for (let tweet of tweet_array){ 
+	if (tweet.source == "live"){
+		live_count ++;
+		}	
+	if (tweet.source == "achievement"){
+		achievemet_count ++;
+		}			
+	if (tweet.source == "completed"){
+		completed_count ++;
+		}	
+	if (tweet.source == "miscellaneous"){
+		misc_count ++;
+	}	
+	}
+	document.getElementsByClassName('liveEvents')[0].innerText = live_count;
+	document.getElementsByClassName('completedEvents')[0].innerText = completed_count;
+	document.getElementsByClassName('miscellaneous')[0].innerText = misc_count;
+	document.getElementsByClassName('achievements')[0].innerText = achievemet_count;
 
 }
 
