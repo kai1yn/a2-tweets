@@ -46,11 +46,44 @@ class Tweet {
     }
 
     get activityType():string {
-        if (this.source != 'completed_event') {
-            return "unknown";
-        }
+        //if (this.source != 'completed_event') {
+        //    return "unknown";
+        //}
         //TODO: parse the activity type from the text of the tweet
-        return "";
+        if (
+            this.text.includes("run") && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "run";
+        if (
+            this.text.includes("walk") || this.text.includes("stroll")  && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "walk";
+        if (
+            this.text.includes("swim")  && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "swim";
+        if (
+            this.text.includes("hike") && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "hike";
+        if (
+            this.text.includes("bike") && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "bike";
+        if (
+            this.text.includes("workout")  
+        )
+        return "workout";
+        if (
+            this.text.includes("ski")  && (this.text.includes("km")||this.text.includes("mi"))
+        )
+        return "ski";
+        if (
+            this.text.includes("MySports")  &&(this.text.includes("completed") || this.text.includes("posted") )
+        )
+        return "MySports";
+        
+        return "Misc";
     }
 
     get distance():number {
