@@ -30,10 +30,10 @@ class Tweet {
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
         //TODO: identify whether the tweet is written
-        if (
-            this.text.includes("-") && !this.text.includes("TomTom") 
-        )
-        return true;
+        let stripped = this.text.replace(/https?:\/\/[^ ]*/g, '').replace(/#Runkeeper\b/g, '')
+
+        if ( (this.text.includes("completed") || this.text.includes("posted") )&& !this.text.includes("Check it out!") && !this.text.includes("TomTom") )
+             return true;
         return false;
     }
 
