@@ -44,15 +44,17 @@ function parseTweets(runkeeper_tweets) {
 	let activityCount = {run,walk, swim, hike, bike,workout,ski, mysports, misc};
 	let sortedActivityCount = Object.entries(activityCount).sort((a,b) => b[1]-a[1]);
 	let [firstplace, secondplace, thirdplace] = sortedActivityCount;
-
+	
 	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"activityType")?.get?.toString());
-	alert(tweet_array[0].activityType);
-	alert(run);
+	alert(tweet_array[0].distance);
 	
 	document.getElementById('numberActivities').innerText = 8;
 	document.getElementById('firstMost').innerText = firstplace[0];
 	document.getElementById('secondMost').innerText = secondplace[0];
 	document.getElementById('thirdMost').innerText = thirdplace[0];
+
+	const format = /\d+\.\d{2}\s*(?:km\mi)/i;
+
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 
 	activity_vis_spec = {
@@ -69,13 +71,6 @@ function parseTweets(runkeeper_tweets) {
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
 }
 
-//People logged the most <span id="firstMost">???</span>, <span id="secondMost">???</span>, and <span id="thirdMost">???</span> activities.</p>
-//    <div id="activityVis"></div>
-  //  <p>Of these three activities, people tended to <span id="longestActivityType">???</span> the longest distance and <span id="shortestActivityType">???</span> the shortest. People tended to do their longest activities on <span id="weekdayOrWeekendLonger">???</span>.</p>
-    //<button id="aggregate" class="btn btn-primary">Show means</button>
-    //<div id="distanceVis"></div>
-    //<div id="distanceVisAggregated"></div>
-//Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function (event) {
 	loadSavedRunkeeperTweets().then(parseTweets);
 });

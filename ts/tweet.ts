@@ -85,10 +85,21 @@ class Tweet {
         
         return "Misc";
     }
-
     get distance():number {
-        if(this.source != 'completed_event') {
-            return 0;
+        const format = /(\d+\.\d{2})\s*(km|mi)/i;
+        if(this.text.includes("completed") || this.text.includes("posted") ) {
+            let result = (this.text.match(format));
+            if (result){
+                let numValue, unit;
+                numValue = parseFloat(result[1]);
+                unit = result[2];
+                if (result[2] == "km"){
+                    return Number((numValue/1.609).toFixed(2));
+                }
+                else{
+                    return numValue;
+                }
+            }
         }
         //TODO: prase the distance from the text of the tweet
         return 0;
