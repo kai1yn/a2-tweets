@@ -87,7 +87,7 @@ class Tweet {
     }
     get distance():number {
         const format = /(\d+\.\d{2})\s*(km|mi)/i;
-        if(this.text.includes("completed") || this.text.includes("posted") ) {
+        if(this.text.includes("completed") || this.text.includes("posted") || (this.text.includes("km")||this.text.includes("mi")  ) ){
             let result = (this.text.match(format));
             if (result){
                 let numValue, unit;

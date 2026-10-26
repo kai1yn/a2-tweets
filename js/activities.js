@@ -10,24 +10,28 @@ function parseTweets(runkeeper_tweets) {
 	});
 	
 	let run=0, walk=0, swim=0, hike=0, bike=0,workout=0,ski=0, mysports=0, misc=0;
-
+	let runDistance = 0,bikeDistance = 0, walkDistance = 0;
+	
 	//findtop3
 	for (let tweet of tweet_array){ 
 		if (tweet.activityType == "run"){
 		run ++;
+		runDistance += tweet.distance;
 		}
 		if (tweet.activityType == "walk"){
 		walk ++;
+		walkDistance+= tweet.distance;
 		}
+		if (tweet.activityType == "bike"){
+		bike ++;
+		bikeDistance += tweet.distance;
+			}	
 		if (tweet.activityType == "swim"){
 		swim ++;
 		}
 		if (tweet.activityType == "hike"){
 		hike ++;
 		}
-		if (tweet.activityType == "bike"){
-		bike ++;
-		}	
 		if (tweet.activityType == "workout"){
 		workout ++;
 		}
@@ -45,15 +49,42 @@ function parseTweets(runkeeper_tweets) {
 	let sortedActivityCount = Object.entries(activityCount).sort((a,b) => b[1]-a[1]);
 	let [firstplace, secondplace, thirdplace] = sortedActivityCount;
 	
-	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"activityType")?.get?.toString());
+	let runAverage = (runDistance/run);
+	let walkAverage = (walkDistance/walk);
+	let bikeAverage = (bikeDistance/bike);
+
+	let longestAverage = runAverage, shortestAverage = runAverage;
+	let longestActivity = "run", shortestActivity = "run";
+	if (walkAverage > longestAverage){
+		longestAverage = walkAverage;
+		longestActivity = "walk";
+	}
+	if (bikeAverage > longestAverage){
+		longestAverage = bikeAverage;
+		longestActivity = "bike";
+	}
+		
+	if (walkAverage < shortestAverage){
+		shortestAverage = walkAverage;
+		shortestActivity = "walk"
+	}
+		
+	if (bikeAverage < shortestAverage){
+		shortestAverage = bikeAverage;
+		shortestActivity = "bike";
+	}
+		
+	
 	alert(tweet_array[0].distance);
+	
 	
 	document.getElementById('numberActivities').innerText = 8;
 	document.getElementById('firstMost').innerText = firstplace[0];
 	document.getElementById('secondMost').innerText = secondplace[0];
 	document.getElementById('thirdMost').innerText = thirdplace[0];
+	document.getElementById('longestActivityType').innerText = longestActivity;
+	document.getElementById('shortestActivityType').innerText = shortestActivity;
 
-	const format = /\d+\.\d{2}\s*(?:km\mi)/i;
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 
