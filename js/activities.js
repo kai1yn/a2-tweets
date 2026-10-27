@@ -244,8 +244,10 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('weekdayOrWeekendLonger').innerText = "weekends";
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
-	
+	const button = document.getElementById("aggregate");
+ 
 	alert(graphTweetArray.length)
+	let aggregated = true;
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 	  "description": "A graph of the number of Tweets containing each type of activity.",
@@ -253,6 +255,8 @@ function parseTweets(runkeeper_tweets) {
 	    "values": graphTweetArray,
 	  },
 	  	  "mark" : "point",
+		 
+
 	  "encoding":{
 		"x": {
 			"field": "time",
@@ -267,7 +271,7 @@ function parseTweets(runkeeper_tweets) {
 		"y": {
 			"field": "distance",
 			"type" : "quantitative",
-			"title" : "Distance",
+			"title" : "Mean of Distance",
 			"axis" : {"grid" : true, "tickCount" : 14}
 		
 		}, 
@@ -278,13 +282,64 @@ function parseTweets(runkeeper_tweets) {
 	  }
 	  //TODO: Add mark and encoding
 	};
+	activity_vis_spec_2 = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "description": "A graph of the number of Tweets containing each type of activity.",
+	  "data": {
+	    "values": graphTweetArray,
+	  },
+	  	  "mark" : "point",
+		 
+
+	  "encoding":{
+		"x": {
+			"field": "time",
+			"type" : "ordinal",
+			"title" : "time(Day)",
+			"sort" :[
+				"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+			],
+			"axis" : {"grid" : true, "tickCount" : 10}
+			
+		},
+		"y": {
+			"field": "distance",
+			"type" : "quantitative",
+			"title" : "Distance",
+			"axis" : {"grid" : true, "tickCount" : 2}
+		
+		}, 
+		"color":{
+			"field": "activity",
+			"type": "nominal"
+		}
+	  }
+	  //TODO: Add mark and encoding
+	  
+	};
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
+	button.addEventListener("click", () =>{
+	alert("button");
+	if (aggregated){
+		vegaEmbed('#activityVis', activity_vis_spec_2, {actions:false});
+		aggregated = false;
+		alert("false")
+	}
+	
+	else{
+		aggregated = true;
+		vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
+	}
+ });
 
 	//TODO: create the visualizations which group the three most-tweeted activities by the day of the week.
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
+ 
 }
+ 
 
 document.addEventListener('DOMContentLoaded', function (event) {
+	
 	loadSavedRunkeeperTweets().then(parseTweets);
 });
 	
