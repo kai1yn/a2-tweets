@@ -27,7 +27,7 @@ function parseTweets(runkeeper_tweets) {
 			latest_date = tweet.time;
 	}
 
-	alert(Object.getOwnPropertyDescriptor(Object.getPrototypeOf(tweet_array[0]),"written")?.get?.toString());
+	
 	//formats like eample
 	const options = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'};
 	

@@ -26,8 +26,7 @@ function parseTweets(runkeeper_tweets) {
 	}
 
 	//TODO: Filter to just the written tweets
-	alert(writtenTweets.length);
-	//alert(tableTweets.length);
+	
 }
 
 

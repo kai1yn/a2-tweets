@@ -259,9 +259,7 @@ function parseTweets(runkeeper_tweets) {
 		shortestActivity = "bike";
 	}
 		
-	
-	
-	alert(weekendCount);
+
 	
 	document.getElementById('numberActivities').innerText = 8;
 	document.getElementById('firstMost').innerText = firstplace[0];
@@ -274,7 +272,7 @@ function parseTweets(runkeeper_tweets) {
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 	const button = document.getElementById("aggregate");
  
-	alert (distanceArray[0].distance);
+	
 
 	let aggregated = true;
 	activity_vis_spec = {
