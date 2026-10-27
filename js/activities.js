@@ -8,7 +8,8 @@ function parseTweets(runkeeper_tweets) {
 	tweet_array = runkeeper_tweets.map(function(tweet) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
-	alert("test");
+
+
 	let run=0, walk=0, swim=0, hike=0, bike=0,workout=0,ski=0, mysports=0, misc=0;
 	let runDistance = 0,bikeDistance = 0, walkDistance = 0;
 	let totalDistance=0, tweetCounter =0;
@@ -16,18 +17,121 @@ function parseTweets(runkeeper_tweets) {
 	//tweet.time.toLocaleDateString('en-US', options)== "Saturday" ||tweet.time.toLocaleDateString('en-US', options)== "Sunday"
 	//document.getElementById('firstDate').innerText = tweet.time.toLocaleDateString('en-US', options);
 	//findtop3
+	let graphTweetArray = [];
+	let monRun = 0, tueRun = 0, wedRun =0, thuRun=0, friRun=0, satRun=0, sunRun =0;
+	let monRunCount = 0, tueRunCount = 0, wedRunCount =0, thuRunCount=0, friRunCount=0, satRunCount=0, sunRunCount =0;
+	let monWalk = 0, tueWalk = 0, wedWalk =0, thuWalk=0, friWalk=0, satWalk=0, sunWalk =0;
+	let monWalkCount = 0, tueWalkCount = 0, wedWalkCount =0, thuWalkCount=0, friWalkCount=0, satWalkCount=0, sunWalkCount =0;
+	let monBike = 0, tueBike = 0, wedBike =0, thuBike=0, friBike=0, satBike=0, sunBike =0;
+	let monBikeCount = 0, tueBikeCount = 0, wedBikeCount =0, thuBikeCount=0, friBikeCount=0, satBikeCount=0, sunBikeCount =0;
 	for (let tweet of tweet_array){ 
 		if (tweet.activityType == "run"){
 		run ++;
 		runDistance += tweet.distance;
+			if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+				monRun += tweet.distance;
+				monRunCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+				tueRun += tweet.distance;
+				tueRunCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+				wedRun += tweet.distance;
+				wedRunCount++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+				thuRun += tweet.distance;
+				thuRunCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+				friRun += tweet.distance;
+				friRunCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+				satRun += tweet.distance;
+				satRunCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+				sunRun += tweet.distance;
+				sunRunCount ++;
+			}
+			
 		}
 		if (tweet.activityType == "walk"){
 		walk ++;
 		walkDistance+= tweet.distance;
+		if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+				monWalk += tweet.distance;
+				monWalkCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+				tueWalk += tweet.distance;
+				tueWalkCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+				wedWalk += tweet.distance;
+				wedWalkCount++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+				thuWalk += tweet.distance;
+				thuWalkCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+				friWalk += tweet.distance;
+				friWalkCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+				satWalk += tweet.distance;
+				satWalkCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+				sunWalk += tweet.distance;
+				sunWalkCount ++;
+			}
+		
 		}
 		if (tweet.activityType == "bike"){
 		bike ++;
 		bikeDistance += tweet.distance;
+		if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+				monBike += tweet.distance;
+				monBikeCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+				tueBike += tweet.distance;
+				tueBikeCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+				wedBike += tweet.distance;
+				wedBikeCount++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+				thuBike += tweet.distance;
+				thuBikeCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+				friBike += tweet.distance;
+				friBikeCount ++;
+			}
+			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+				satBike += tweet.distance;
+				satBikeCount ++;
+			}
+				
+			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+				sunBike += tweet.distance;
+				sunBikeCount ++;
+			}
+		
 			}	
 		if (tweet.activityType == "swim"){
 		swim ++;
@@ -66,8 +170,31 @@ function parseTweets(runkeeper_tweets) {
 			}
 		}
 	}
+	graphTweetArray.push ({activity: "Run", distance: (sunRun/sunRunCount), time: "Sun" });
+	graphTweetArray.push ({activity: "Run", distance: (monRun/monRunCount), time: "Mon" });
+	graphTweetArray.push ({activity: "Run", distance: (tueRun/tueRunCount), time: "Tue" });
+	graphTweetArray.push ({activity: "Run", distance: (wedRun/wedRunCount), time: "Wed" });
+	graphTweetArray.push ({activity: "Run", distance: (thuRun/thuRunCount), time: "Thu" });
+	graphTweetArray.push ({activity: "Run", distance: (friRun/friRunCount), time: "Fri" });
+	graphTweetArray.push ({activity: "Run", distance: (satRun/satRunCount), time: "Sat" });
 
+	graphTweetArray.push ({activity: "Walk", distance: (sunWalk/sunWalkCount), time: "Sun" });
+	graphTweetArray.push ({activity: "Walk", distance: (monWalk/monWalkCount), time: "Mon" });
+	graphTweetArray.push ({activity: "Walk", distance: (tueWalk/tueWalkCount), time: "Tue" });
+	graphTweetArray.push ({activity: "Walk", distance: (wedWalk/wedWalkCount), time: "Wed" });
+	graphTweetArray.push ({activity: "Walk", distance: (thuWalk/thuWalkCount), time: "Thu" });
+	graphTweetArray.push ({activity: "Walk", distance: (friWalk/friWalkCount), time: "Fri" });
+	graphTweetArray.push ({activity: "Walk", distance: (satWalk/satWalkCount), time: "Sat" });
 
+	graphTweetArray.push ({activity: "Bike", distance: (sunBike/sunBikeCount), time: "Sun" });
+	graphTweetArray.push ({activity: "Bike", distance: (monBike/monBikeCount), time: "Mon" });
+	graphTweetArray.push ({activity: "Bike", distance: (tueBike/tueBikeCount), time: "Tue" });
+	graphTweetArray.push ({activity: "Bike", distance: (wedBike/wedBikeCount), time: "Wed" });
+	graphTweetArray.push ({activity: "Bike", distance: (thuBike/thuBikeCount), time: "Thu" });
+	graphTweetArray.push ({activity: "Bike", distance: (friBike/friBikeCount), time: "Fri" });
+	graphTweetArray.push ({activity: "Bike", distance: (satBike/satBikeCount), time: "Sat" });
+
+	
 	dayCount = weekdayCount;
 	dayValue = "Weekdays";
 	if (weekendCount> dayCount){
@@ -105,8 +232,8 @@ function parseTweets(runkeeper_tweets) {
 	}
 		
 	
-	alert(tweet_array[0].distance);
 	
+	alert(weekendCount);
 	
 	document.getElementById('numberActivities').innerText = 8;
 	document.getElementById('firstMost').innerText = firstplace[0];
@@ -114,15 +241,40 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('thirdMost').innerText = thirdplace[0];
 	document.getElementById('longestActivityType').innerText = longestActivity;
 	document.getElementById('shortestActivityType').innerText = shortestActivity;
-	document.getElementById('weekdayOrWeekendLonger').innerText = dayValue;
+	document.getElementById('weekdayOrWeekendLonger').innerText = "weekends";
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
-
+	
+	alert(graphTweetArray.length)
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 	  "description": "A graph of the number of Tweets containing each type of activity.",
 	  "data": {
-	    "values": tweet_array
+	    "values": graphTweetArray,
+	  },
+	  	  "mark" : "point",
+	  "encoding":{
+		"x": {
+			"field": "time",
+			"type" : "ordinal",
+			"title" : "time(Day)",
+			"sort" :[
+				"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+			],
+			"axis" : {"grid" : true, "tickCount" : 14}
+			
+		},
+		"y": {
+			"field": "distance",
+			"type" : "quantitative",
+			"title" : "Distance",
+			"axis" : {"grid" : true, "tickCount" : 14}
+		
+		}, 
+		"color":{
+			"field": "activity",
+			"type": "nominal"
+		}
 	  }
 	  //TODO: Add mark and encoding
 	};
