@@ -106,7 +106,12 @@ class Tweet {
     }
 
     getHTMLTableRow(rowNumber:number):string {
+        const url = this.text.match(/https?:\/\/\S+/);
+        const tweetText = this.text;
+        
+        
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
+       
         return "<tr></tr>";
     }
 }
