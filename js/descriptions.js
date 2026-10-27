@@ -13,17 +13,11 @@ function parseTweets(runkeeper_tweets) {
 			writtenTweets.push(tweet);
 		}
 	}
-	let tableTweets = [];
 	let table = document.getElementById("tweetTable");
 	
 	for (let i =1; i<= writtenTweets.length; i++){
 		let tweet = writtenTweets[i-1];
-		tableTweets.push({
-			num: i,
-			type: tweet.activityType,
-			text: tweet.text
-		});
-
+		
 		
 		let row = table.insertRow();
 		row.insertCell(0).textContent = i;
@@ -38,6 +32,30 @@ function parseTweets(runkeeper_tweets) {
 
 
 function addEventHandlerForSearch() {
+	let userInput = document.getElementById("textFilter");
+	let text = document.getElementById("searchText");
+	let count = document.getElementById("searchCount");
+
+	userInput.addEventListener("input", function(){
+		let query = userInput.value.toLowerCase();
+		text.textContent = userInput.value;
+
+		let filteredTweets = writtenTweets.filter(function(tweet){
+			return tweet.text.toLowerCase().includes(query);
+		});
+
+	
+	let table = document.getElementById("tweetTable");
+	table.innerHTML = "";
+	for (let i = 0; i< filteredTweets.length; i++){
+		let tweet = filteredTweets[i];
+		let row = table.insertRow();
+		row.insertCell(0).textContent = i+1;
+		row.insertCell(1).textContent = tweet.activityType;
+		row.insertCell(2).textContent = tweet.text;
+	}
+	count.textContent = filteredTweets.length;
+});
 	//TODO: Search the written tweets as text is entered into the search box, and add them to the table
 }
 
