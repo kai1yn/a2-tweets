@@ -9,7 +9,7 @@ function parseTweets(runkeeper_tweets) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
 
-
+	let distanceArray = [];
 	let run=0, walk=0, swim=0, hike=0, bike=0,workout=0,ski=0, mysports=0, misc=0;
 	let runDistance = 0,bikeDistance = 0, walkDistance = 0;
 	let totalDistance=0, tweetCounter =0;
@@ -25,111 +25,139 @@ function parseTweets(runkeeper_tweets) {
 	let monBike = 0, tueBike = 0, wedBike =0, thuBike=0, friBike=0, satBike=0, sunBike =0;
 	let monBikeCount = 0, tueBikeCount = 0, wedBikeCount =0, thuBikeCount=0, friBikeCount=0, satBikeCount=0, sunBikeCount =0;
 	for (let tweet of tweet_array){ 
+		let temp_time = tweet.time.toLocaleDateString('en-US', options)
 		if (tweet.activityType == "run"){
 		run ++;
 		runDistance += tweet.distance;
-			if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+			if (temp_time == "Monday"){
 				monRun += tweet.distance;
 				monRunCount ++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Mon" });
+				
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+			if (temp_time== "Tuesday"){
 				tueRun += tweet.distance;
 				tueRunCount ++;
-			}
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Tue" });
+			}	
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+			if (temp_time == "Wednesday"){
 				wedRun += tweet.distance;
 				wedRunCount++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Wed" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+			if (temp_time== "Thursday"){
 				thuRun += tweet.distance;
 				thuRunCount ++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Thu" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+			if (temp_time == "Friday"){
 				friRun += tweet.distance;
 				friRunCount ++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Fri" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+			if (temp_time == "Saturday"){
 				satRun += tweet.distance;
 				satRunCount ++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Sat" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+			if (temp_time == "Sunday"){
 				sunRun += tweet.distance;
 				sunRunCount ++;
+				distanceArray.push ({activity: "Run", distance: tweet.distance, time: "Sun" });
 			}
 			
 		}
 		if (tweet.activityType == "walk"){
 		walk ++;
 		walkDistance+= tweet.distance;
-		if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+		if (temp_time == "Monday"){
 				monWalk += tweet.distance;
 				monWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Mon" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+			if (temp_time == "Tuesday"){
 				tueWalk += tweet.distance;
 				tueWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Tue" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+			if (temp_time == "Wednesday"){
 				wedWalk += tweet.distance;
 				wedWalkCount++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Wed" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+			if (temp_time == "Thursday"){
 				thuWalk += tweet.distance;
 				thuWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Thu" });
+			
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+			if (temp_time == "Friday"){
 				friWalk += tweet.distance;
 				friWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Fri" });
+			
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+			if (temp_time == "Saturday"){
 				satWalk += tweet.distance;
 				satWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Sat" });
+			
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+			if (temp_time== "Sunday"){
 				sunWalk += tweet.distance;
 				sunWalkCount ++;
+				distanceArray.push ({activity: "Walk", distance: tweet.distance, time: "Sun" });
+			
 			}
 		
 		}
 		if (tweet.activityType == "bike"){
 		bike ++;
 		bikeDistance += tweet.distance;
-		if (tweet.time.toLocaleDateString('en-US', options) == "Monday"){
+		
+		if (temp_time == "Monday"){
 				monBike += tweet.distance;
 				monBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Mon" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Tuesday"){
+			if (temp_time == "Tuesday"){
 				tueBike += tweet.distance;
 				tueBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Tue" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Wednesday"){
+			if (temp_time == "Wednesday"){
 				wedBike += tweet.distance;
 				wedBikeCount++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Wed" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Thursday"){
+			if (temp_time == "Thursday"){
 				thuBike += tweet.distance;
 				thuBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Thu" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Friday"){
+			if (temp_time== "Friday"){
 				friBike += tweet.distance;
 				friBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Fri" });
 			}
-			if (tweet.time.toLocaleDateString('en-US', options) == "Saturday"){
+			if (temp_time == "Saturday"){
 				satBike += tweet.distance;
 				satBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Sat" });
 			}
 				
-			if (tweet.time.toLocaleDateString('en-US', options) == "Sunday"){
+			if (temp_time == "Sunday"){
 				sunBike += tweet.distance;
 				sunBikeCount ++;
+				distanceArray.push ({activity: "Bike", distance: tweet.distance, time: "Sun" });
 			}
 		
 			}	
@@ -246,9 +274,46 @@ function parseTweets(runkeeper_tweets) {
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 	const button = document.getElementById("aggregate");
  
-	alert(graphTweetArray.length)
+	alert (distanceArray[0].distance);
+
 	let aggregated = true;
 	activity_vis_spec = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "description": "A graph of the number of Tweets containing each type of activity.",
+	  "data": {
+	    "values": distanceArray.filter(d => d.distance <=500),
+	  },
+	  	  "mark" : "point",
+		 
+
+	  "encoding":{
+		"x": {
+			"field": "time",
+			"type" : "ordinal",
+			"title" : "time(Day)",
+			"sort" :[
+				"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+			],
+			"axis" : {"grid" : true, "tickCount" : 10}
+			
+		},
+		"y": {
+			"field": "distance",
+			"type" : "quantitative",
+			"title" : "Distance",
+			"axis" : {"grid" : true, "tickCount" : 10}
+			
+			
+		
+		}, 
+		"color":{
+			"field": "activity",
+			"type": "nominal"
+		}
+	  }
+	  //TODO: Add mark and encoding
+	};
+	activity_vis_spec_2 = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 	  "description": "A graph of the number of Tweets containing each type of activity.",
 	  "data": {
@@ -281,49 +346,13 @@ function parseTweets(runkeeper_tweets) {
 		}
 	  }
 	  //TODO: Add mark and encoding
-	};
-	activity_vis_spec_2 = {
-	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-	  "description": "A graph of the number of Tweets containing each type of activity.",
-	  "data": {
-	    "values": graphTweetArray,
-	  },
-	  	  "mark" : "point",
-		 
-
-	  "encoding":{
-		"x": {
-			"field": "time",
-			"type" : "ordinal",
-			"title" : "time(Day)",
-			"sort" :[
-				"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-			],
-			"axis" : {"grid" : true, "tickCount" : 10}
-			
-		},
-		"y": {
-			"field": "distance",
-			"type" : "quantitative",
-			"title" : "Distance",
-			"axis" : {"grid" : true, "tickCount" : 2}
-		
-		}, 
-		"color":{
-			"field": "activity",
-			"type": "nominal"
-		}
-	  }
-	  //TODO: Add mark and encoding
 	  
 	};
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
 	button.addEventListener("click", () =>{
-	alert("button");
 	if (aggregated){
 		vegaEmbed('#activityVis', activity_vis_spec_2, {actions:false});
 		aggregated = false;
-		alert("false")
 	}
 	
 	else{
